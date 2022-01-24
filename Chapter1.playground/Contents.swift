@@ -11,12 +11,20 @@ let view = MTKView(frame: frame, device: device)
 view.clearColor = MTLClearColor(red: 1, green: 1, blue: 0.8, alpha:1)
 
 let allocator = MTKMeshBufferAllocator(device: device)
-let mdlMesh = MDLMesh(sphereWithExtent: [0.2, 0.75, 0.2],
-                      segments: [100, 100],
-                      inwardNormals: false,
-                      geometryType: .triangles,
-                      allocator: allocator)
-let mesh = try MTKMesh(mesh: mdlMesh, device: device)
+//let mdlMesh = MDLMesh(sphereWithExtent: [0.2, 0.75, 0.2],
+//                      segments: [100, 100],
+//                      inwardNormals: false,
+//                      geometryType: .triangles,
+//                      allocator: allocator)
+
+let mdlMesh2 = MDLMesh(cylinderWithExtent: [0.1, 1, 0.5],
+                       segments: [50, 50],
+                       inwardNormals: true,
+                       topCap: true,
+                       bottomCap: true,
+                       geometryType: .triangleStrips,
+                       allocator: allocator)
+let mesh = try MTKMesh(mesh: mdlMesh2, device: device)
 
 guard let commandQueue = device.makeCommandQueue() else {
     fatalError("Could not create a command queue")
